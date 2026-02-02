@@ -1,0 +1,14 @@
+version: 1.0
+runtime: python311                 # <--- Specifically locks to Python 3.11
+build:
+  commands:
+    build:
+      - pip3 install -r requirements/base.txt  # Must use pip3
+      - python3 manage.py collectstatic --noinput # Must use python3
+run:
+  # config.wsgi must match your project folder name
+  command: gunicorn awstest.wsgi:application --bind 0.0.0.0:$PORT --workers 3
+  network:
+    port: 8000
+  env:
+    DJANGO_SETTINGS_MODULE: config.settings
