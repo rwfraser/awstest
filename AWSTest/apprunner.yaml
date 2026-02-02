@@ -1,14 +1,18 @@
 version: 1.0
-runtime: python311                 # <--- Specifically locks to Python 3.11
+runtime: python311
 build:
   commands:
+    # 1. Install production dependencies
     build:
-      - pip3 install -r requirements/base.txt  # Must use pip3
-      - python3 manage.py collectstatic --noinput # Must use python3
+      - pip3 install -r requirements/base.txt
+    # 2. Collect static files (CSS/JS) so WhiteNoise can serve them
+      - python3 manage.py collectstatic --noinput
 run:
-  # config.wsgi must match your project folder name
+  # 3. Start the application using Gunicorn
+  # Ensure 'config.wsgi' matches your actual project folder name
   command: gunicorn awstest.wsgi:application --bind 0.0.0.0:$PORT --workers 3
   network:
     port: 8000
   env:
+    # Static environment variables
     DJANGO_SETTINGS_MODULE: config.settings
