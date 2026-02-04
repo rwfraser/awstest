@@ -10,7 +10,7 @@ build:
 run:
   # 3. Start the application using Gunicorn
   # Ensure 'config.wsgi' matches your actual project folder name
-  command: gunicorn awstest.wsgi:application --bind 0.0.0.0:$PORT --workers 3
+  command: gunicorn awstest.wsgi:application --bind 0.0.0.0:8000 --workers 3
   network:
     port: 8000
   env:
