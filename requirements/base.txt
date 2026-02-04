@@ -1,6 +1,5 @@
 # --- Core Framework ---
 Django==5.2.10
-psycopg==3.2.3             # Use source version for production stability
 django-environ==0.12.0
 asgiref==3.11.0
 sqlparse==0.5.5
@@ -13,6 +12,8 @@ django-guardian==2.4.0
 django-otp==1.4.0
 argon2-cffi==23.1.0
 # django-cryptography==1.2 # CAUTION: Evaluate maintenance status before use
+certifi==2026.1.4
+
 
 # --- Payments ---
 stripe==11.4.1
@@ -28,10 +29,17 @@ django-countries>=7.6      # Standard for shipping addresses
 djangorestframework==3.15.2
 drf-spectacular==0.27.2
 
+# --- External Domains ---
+requests==2.32.5
+urllib3==2.6.3
+charset-normalizer==3.4.4
+idna==3.11
+
 # --- Tasks & Cache ---
 celery==5.4.0
 redis==5.0.8
 django-redis>=5.4.0        # Required to link Django cache to Redis
+packaging==26.0
 
 # --- Logging / Monitoring ---
 structlog==24.4.0
@@ -40,6 +48,6 @@ sentry-sdk[django]==2.19.0
 
 # --- AWS Production Infrastructure (Added) ---
 whitenoise[brotli]>=6.7.0  # MANDATORY: Serves static files in App Runner
-django-storages[boto3]>=1.14 # MANDATORY: Stores media (images) on S3
-django-anymail[sendgrid]>=11.0 # MANDATORY: Reliable email delivery
+django-storages[boto3]>=1.14.6 # MANDATORY: Stores media (images) on S3
+django-anymail[sendgrid]>=14.0 # MANDATORY: Reliable email delivery
 gunicorn==23.0.0           # Production Web Server

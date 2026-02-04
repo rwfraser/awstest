@@ -37,8 +37,8 @@ DEBUG = env('DEBUG')
 
 
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [".awsapprunner.com"]
+# ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".awsapprunner.com"]
 
 # Application definition
 
@@ -130,7 +130,18 @@ USE_TZ = True
 STATIC_URL = "static/"
 # Configure WhiteNoise to compress and cache files
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" OBSOLETE 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
