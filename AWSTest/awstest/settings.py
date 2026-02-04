@@ -29,7 +29,7 @@ env = environ.Env(
 )
 
 # This reads the .env file locally (if it exists)
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(str(BASE_DIR / '.env'))
 
 # If 'DEBUG' is in your .env or AWS Console, use that.
 # If not found, use the default (False) defined above.
